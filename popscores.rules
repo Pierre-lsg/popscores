@@ -1,5 +1,5 @@
 List of popscores elements :
-    +a championship :
+    ++a championship :
         name : string
         description : text
         season : @season
@@ -7,11 +7,11 @@ List of popscores elements :
         numberCompetitionMax4Calculus : integer
         is_internal : logical
 
-    +a season :
+    ++a season :
         name : string
         description : text
 
-    +a competition :
+    ++a competition :
         name : string
         description : text
         championship : @championship
@@ -28,7 +28,7 @@ List of popscores elements :
         publishedAt : date
         organizers : @user
 
-    +a hole :
+    ++a hole :
         name : string
         description : text
         rule: @rule
@@ -36,40 +36,40 @@ List of popscores elements :
         position : @position
         referees : @user
 
-    +a position :
+    ++a position :
         gps_start : string
         gps_end : string
         picture_start : string
         picture_end : string
 
-    +a rule : 
+    ++a rule : 
         name : string
         description : text
 
-    +a flight :
+    ++a flight :
         teams : @team
         competition : @competition
         internal_competition_id : integer
         referees : @user
 
-    +a result : 
+    ++a result : 
         score : integer
         player : @player
         hole : @hole
         competition : @competition
 
-    +a club :
+    ++a club :
         name : string
         description : text
         logo : string
 
-    +a team :
+    ++a team :
         name : string
         club : @club
         competition : @competition
         is4Championship : logical
 
-    +a player :
+    ++a player :
         firstname : string
         lastname : string
         nickname : string
@@ -77,7 +77,7 @@ List of popscores elements :
         is4Championship : logical
         team : @team
 
-    +a user :
+    ++a user :
         username : string
         role : json
         password : string
@@ -93,7 +93,7 @@ List of popscores elements :
         +an administrator (ROLE_ADMIN):
             user : @user
     
-    +a competition rank player :
+    ++a competition rank player :
         competition : @competition
         rank : integer
         player : @player
@@ -101,7 +101,7 @@ List of popscores elements :
         deltaHit : integer
         score : integer
 
-    +a competition rank team :
+    ++a competition rank team :
         competition : @competition
         rank : integer
         team : @team
@@ -109,24 +109,24 @@ List of popscores elements :
         deltaHit : integer
         score : integer
 
-    +a championship rank player :
+    ++a championship rank player :
         championship : @championship
         rank : integer
         player : @player
         score : integer
 
-    +a championship rank club :
+    ++a championship rank club :
         championship : @championship
         rank : integer
         club : @club
         score : integer
 
-    +a player ranking calculus :
+    ++a player ranking calculus :
         rank : integer
         score : integer
         championship : @championship
 
-    a team ranking calculus :
+    ++a team ranking calculus :
         rank : integer
         score : integer
         championship : @championship
