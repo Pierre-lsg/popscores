@@ -1,0 +1,134 @@
+List of popscores elements :
+    +a championship :
+        name : string
+        description : text
+        season : @season
+        logo : string
+        numberCompetitionMax4Calculus : integer
+        is_internal : logical
+
+    +a season :
+        name : string
+        description : text
+
+    +a competition :
+        name : string
+        description : text
+        championship : @championship
+        internal_championship_id : integer
+        playedAt : date
+        logo : string
+        map : string
+        rule_file : string
+        rule_text : text
+        player_by_team : integer
+        team_by_flight : integer
+        holes : @hole
+        forChampionship : logical
+        publishedAt : date
+        organizers : @user
+
+    +a hole :
+        name : string
+        description : text
+        rule: @rule
+        par : integer
+        position : @position
+        referees : @user
+
+    +a position :
+        gps_start : string
+        gps_end : string
+        picture_start : string
+        picture_end : string
+
+    +a rule : 
+        name : string
+        description : text
+
+    +a flight :
+        teams : @team
+        competition : @competition
+        internal_competition_id : integer
+        referees : @user
+
+    +a result : 
+        score : integer
+        player : @player
+        hole : @hole
+        competition : @competition
+
+    +a club :
+        name : string
+        description : text
+        logo : string
+
+    +a team :
+        name : string
+        club : @club
+        competition : @competition
+        is4Championship : logical
+
+    +a player :
+        firstname : string
+        lastname : string
+        nickname : string
+        picture : string
+        is4Championship : logical
+        team : @team
+
+    +a user :
+        username : string
+        role : json
+        password : string
+
+        +an organizer (ROLE_ORGA): 
+            user : @user
+            club : @club
+
+        +a referee (ROLE_REFE):
+            user : @user
+            simplified_password : integer
+
+        +an administrator (ROLE_ADMIN):
+            user : @user
+    
+    +a competition rank player :
+        competition : @competition
+        rank : integer
+        player : @player
+        totalHit : integer
+        deltaHit : integer
+        score : integer
+
+    +a competition rank team :
+        competition : @competition
+        rank : integer
+        team : @team
+        totalHit : integer
+        deltaHit : integer
+        score : integer
+
+    +a championship rank player :
+        championship : @championship
+        rank : integer
+        player : @player
+        score : integer
+
+    +a championship rank club :
+        championship : @championship
+        rank : integer
+        club : @club
+        score : integer
+
+    +a player ranking calculus :
+        rank : integer
+        score : integer
+        championship : @championship
+
+    a team ranking calculus :
+        rank : integer
+        score : integer
+        championship : @championship
+
+List of application's actions
