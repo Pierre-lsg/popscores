@@ -1,0 +1,8 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        championshipLogos:
+            uri_prefix: /images/championshipLogos
+            upload_destination: '%kernel.project_dir%/public/images/championshipLogos'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

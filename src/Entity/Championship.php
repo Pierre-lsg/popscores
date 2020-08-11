@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
-use App\Repository\ChampionshipRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Season;
+use App\Entity\Competition;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\TeamRankingCalculus;
+use App\Entity\ChampionshipRankClub;
+use App\Entity\PlayerRankingCalculus;
+use App\Entity\ChampionshipRankPlayer;
+use App\Repository\ChampionshipRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ChampionshipRepository::class)
+ * @Vich\Uploadable
  */
 class Championship
 {
@@ -39,6 +48,16 @@ class Championship
      * @ORM\Column(type="string", length=255)
      */
     private $logo;
+
+    /**
+     * @Vich\UploadableField(mapping="championshipLogos", fileNameProperty="logo")
+     */
+    private $logoFile;
+    
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="integer")
@@ -77,6 +96,7 @@ class Championship
 
     public function __construct()
     {
+        $this->updatedAt = new \DateTime();
         $this->competitions = new ArrayCollection();
         $this->championshipRankPlayers = new ArrayCollection();
         $this->championshipRankClubs = new ArrayCollection();
@@ -133,6 +153,22 @@ class Championship
     public function setLogo(string $logo): self
     {
         $this->logo = $logo;
+
+        return $this;
+    }
+
+    public function getLogoFile(): ?string
+    {
+        return $this->logoFile;
+    }
+
+    public function setLogoFile(File $logoFile): self
+    {
+        $this->logoFile = $logoFile;
+
+        if ($logoFile) {
+            $this->updatedAt = new \DateTime();
+        }
 
         return $this;
     }
@@ -312,6 +348,18 @@ class Championship
                 $teamRankingCalculus->setChampionship(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
