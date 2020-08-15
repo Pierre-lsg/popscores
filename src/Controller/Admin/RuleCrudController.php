@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Rule;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 
 class RuleCrudController extends AbstractCrudController
 {
@@ -12,14 +14,11 @@ class RuleCrudController extends AbstractCrudController
         return Rule::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            TextField::new('name'),
+            TextareaField::new('description'),
         ];
     }
-    */
 }

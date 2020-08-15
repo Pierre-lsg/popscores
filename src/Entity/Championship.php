@@ -45,17 +45,19 @@ class Championship
     private $season;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $logo;
 
     /**
      * @Vich\UploadableField(mapping="championshipLogos", fileNameProperty="logo")
+     * 
+     * @var File|null
      */
     private $logoFile;
     
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -150,27 +152,25 @@ class Championship
         return $this->logo;
     }
 
-    public function setLogo(string $logo): self
+    public function setLogo(string $logo = null): self
     {
         $this->logo = $logo;
 
         return $this;
     }
 
-    public function getLogoFile(): ?string
+    public function getLogoFile(): ?File
     {
         return $this->logoFile;
     }
 
-    public function setLogoFile(File $logoFile): self
+    public function setLogoFile(?File $logoFile = null): void
     {
         $this->logoFile = $logoFile;
 
         if ($logoFile) {
             $this->updatedAt = new \DateTime();
         }
-
-        return $this;
     }
 
     public function getNumberCompetitionMax4Calculus(): ?int

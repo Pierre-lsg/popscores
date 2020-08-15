@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Club;
+use App\Entity\Rule;
 use App\Entity\Team;
 use App\Entity\User;
 use App\Entity\Player;
@@ -53,6 +54,9 @@ class DashboardController extends AbstractDashboardController
 
             MenuItem::section('Users'),
             MenuItem::linkToCrud('Users', 'fa fa-tags', User::class),
+
+            MenuItem::section('Others'),
+            MenuItem::linkToCrud('Rules', 'fa fa-tags', Rule::class),
 
         ] ;
         // yield MenuItem::linkToCrud('The Label', 'icon class', EntityClass::class);

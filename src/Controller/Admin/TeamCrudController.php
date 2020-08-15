@@ -12,7 +12,6 @@ class TeamCrudController extends AbstractCrudController
         return Team::class;
     }
 
-    /*
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -21,5 +20,4 @@ class TeamCrudController extends AbstractCrudController
             TextEditorField::new('description'),
         ];
     }
-    */
 }

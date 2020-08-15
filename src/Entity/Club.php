@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\ClubRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Team;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ClubRepository;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ClubRepository::class)
+ * @Vich\Uploadable
  */
 class Club
 {
@@ -35,6 +39,18 @@ class Club
     private $logo;
 
     /**
+     * @Vich\UploadableField(mapping="clubLogos", fileNameProperty="logo")
+     * 
+     * @var File|null
+     */
+    private $logoFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\OneToMany(targetEntity=Team::class, mappedBy="club")
      */
     private $teams;
@@ -51,6 +67,7 @@ class Club
 
     public function __construct()
     {
+        $this->updatedAt = new \DateTime();
         $this->teams = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->championshipRankClubs = new ArrayCollection();
@@ -90,11 +107,25 @@ class Club
         return $this->logo;
     }
 
-    public function setLogo(?string $logo): self
+    public function setLogo(string $logo = null): self
     {
         $this->logo = $logo;
 
         return $this;
+    }
+
+    public function getLogoFile(): ?File
+    {
+        return $this->logoFile;
+    }
+
+    public function setLogoFile(?File $logoFile = null): void
+    {
+        $this->logoFile = $logoFile;
+
+        if ($logoFile) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     /**
